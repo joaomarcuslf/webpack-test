@@ -1,2 +1,15 @@
 @charset "utf-8";
 @import "../../node_modules/bulma/bulma.sass";
+
+@import "./ghost-block.scss";
+
+.navbar-menu {
+  align-items: stretch;
+  display: flex;
+  background-color: #181b1f;
+  border-bottom: rgba(255, 255, 255, .01) solid 2px;
+
+  * {
+    background-color: transparent !important;
+  }
+}
