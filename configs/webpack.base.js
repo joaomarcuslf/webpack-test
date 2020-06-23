@@ -1,12 +1,14 @@
 const path = require("path");
 
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CopyPlugin = require('copy-webpack-plugin');
 
 const paths = {
   entryJs: "./src/javascript/index.js",
 
   distDir: "../dist",
   publicDir: "../public",
+  imagesDir: "../src/images",
 
   filename: {
     js: "bundle.js",
@@ -40,6 +42,7 @@ module.exports = {
           { loader: MiniCssExtractPlugin.loader },
           { loader: "css-loader" },
           { loader: "postcss-loader" },
+          { loader: 'resolve-url-loader' },
           {
             loader: "sass-loader",
             options: {
@@ -77,6 +80,14 @@ module.exports = {
   plugins: [
     new MiniCssExtractPlugin({
       filename: paths.filename.css,
+    }),
+    new CopyPlugin({
+      patterns: [
+        {
+          from: path.join(__dirname, paths.imagesDir),
+          to: path.join(__dirname, paths.distDir, "images"),
+        },
+      ],
     }),
   ],
 
