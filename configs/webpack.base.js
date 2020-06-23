@@ -2,13 +2,26 @@ const path = require("path");
 
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
+const paths = {
+  entryJs: "./src/javascript/index.js",
+
+  distDir: "../dist",
+  publicDir: "../public",
+
+  filename: {
+    js: "bundle.js",
+    css: "bundle.css",
+  }
+}
+
 module.exports = {
-  entry: "./src/javascript/index.js",
+  entry: paths.entryJs,
 
   output: {
-    path: path.resolve(__dirname, "../dist"),
-    filename: "bundle.js",
+    path: path.resolve(__dirname, paths.distDir),
+    filename: paths.filename.js,
   },
+
   module: {
     rules: [
       {
@@ -63,12 +76,15 @@ module.exports = {
 
   plugins: [
     new MiniCssExtractPlugin({
-      filename: "bundle.css",
+      filename: paths.filename.css,
     }),
   ],
 
   devServer: {
-    contentBase: [path.join(__dirname, '../public'), path.join(__dirname, "../dist")],
+    contentBase: [
+      path.join(__dirname, paths.publicDir),
+      path.join(__dirname, paths.distDir)
+    ],
     compress: true,
     port: 9000,
   },
