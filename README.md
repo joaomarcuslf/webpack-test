@@ -1,0 +1,1 @@
+# The goal of this project is to test some basic webpack config
